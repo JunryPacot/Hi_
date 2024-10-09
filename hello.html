@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hi Danna - Super Cute Animated Greeting</title>
+    <style>
+        /* Importing Google Fonts for a more playful look */
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f8f9fa, #e0f7fa);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Pacifico', cursive, sans-serif;
+            position: relative;
+        }
+
+        /* Container for the greeting text and Hello Kitty */
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Styling each letter with bounce animation */
+        .letter {
+            display: inline-block;
+            font-size: 4rem;
+            color: #ff6ec7;
+            animation: bounce 1s infinite;
+            margin: 0 12px; /* Increased spacing between letters */
+        }
+
+        /* Alternating colors for each letter */
+        .letter:nth-child(odd) {
+            color: #feca57;
+            animation-delay: 0.2s;
+        }
+
+        .letter:nth-child(even) {
+            color: #48dbfb;
+            animation-delay: 0.4s;
+        }
+
+        /* Bounce animation keyframes */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Sparkle Styles */
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.2;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+        }
+
+        /* Hello Kitty Styles */
+        .hello-kitty {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%) rotateX(25deg);
+            width: 150px;
+            height: 150px;
+            background: #fff;
+            border: 4px solid #000;
+            border-radius: 50% 50% 45% 45%;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            z-index: 3;
+            animation: floatHello 6s ease-in-out infinite;
+        }
+
+        /* Floating animation for Hello Kitty */
+        @keyframes floatHello {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0) rotateX(25deg);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-20px) rotateX(25deg);
+            }
+        }
+
+        /* Hello Kitty Ears */
+        .hello-kitty::before,
+        .hello-kitty::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            border: 4px solid #000;
+            border-radius: 50%;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .hello-kitty::before {
+            left: 20px;
+            transform: rotate(-20deg);
+        }
+
+        .hello-kitty::after {
+            right: 20px;
+            transform: rotate(20deg);
+        }
+
+        /* Hello Kitty Bow */
+        .hello-kitty .bow {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 30px;
+            background: pink;
+            border-radius: 15px 15px 0 0;
+            border: 2px solid #000;
+        }
+
+        .hello-kitty .bow::before,
+        .hello-kitty .bow::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            width: 20px;
+            height: 20px;
+            background: pink;
+            border: 2px solid #000;
+            border-radius: 50%;
+        }
+
+        .hello-kitty .bow::before {
+            left: -10px;
+        }
+
+        .hello-kitty .bow::after {
+            right: -10px;
+        }
+
+        /* Hello Kitty Face */
+        .hello-kitty .face {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 60px;
+            background: pink;
+            border: 2px solid #000;
+            border-radius: 50%;
+            z-index: 4;
+        }
+
+        /* Eyes */
+        .hello-kitty .face::before,
+        .hello-kitty .face::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 10px;
+            height: 10px;
+            background: #000;
+            border-radius: 50%;
+        }
+
+        .hello-kitty .face::before {
+            left: 20px;
+        }
+
+        .hello-kitty .face::after {
+            right: 20px;
+        }
+
+        /* Nose */
+        .hello-kitty .face .nose {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: #000;
+            border-radius: 50%;
+        }
+
+        /* Whiskers */
+        .hello-kitty .face::after {
+            /* Reuse for eyes */
+        }
+
+        .hello-kitty .face::after + .whiskers {
+            content: '';
+            position: absolute;
+            top: 35px;
+            width: 40px;
+            height: 2px;
+            background: #000;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .whiskers-left {
+            top: 35px;
+            left: 10%;
+            width: 40px;
+            height: 2px;
+            background: #000;
+            transform: rotate(0deg);
+        }
+
+        .whiskers-right {
+            top: 35px;
+            right: 10%;
+            width: 40px;
+            height: 2px;
+            background: #000;
+            transform: rotate(0deg);
+        }
+
+        /* Rose Styles */
+        .rose {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: red;
+            border-radius: 50% 50% 45% 45%;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            z-index: 1;
+            animation: floatRose 8s ease-in-out infinite;
+        }
+
+        /* Floating animation for roses */
+        @keyframes floatRose {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(360deg);
+            }
+        }
+
+        /* Positioning roses */
+        .rose1 {
+            top: 20%;
+            left: 15%;
+            background: #ff6ec7;
+        }
+
+        .rose2 {
+            top: 70%;
+            left: 80%;
+            background: #feca57;
+            animation-duration: 10s;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .letter {
+                font-size: 2.5rem;
+                margin: 0 6px;
+            }
+            .hello-kitty {
+                width: 100px;
+                height: 100px;
+            }
+            .hello-kitty .face {
+                width: 50px;
+                height: 40px;
+                top: 20px;
+            }
+            .hello-kitty::before,
+            .hello-kitty::after {
+                width: 30px;
+                height: 30px;
+            }
+            .hello-kitty .bow {
+                width: 40px;
+                height: 20px;
+            }
+            .rose {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sparkles -->
+    <div class="sparkle" style="top: 10%; left: 20%;"></div>
+    <div class="sparkle" style="top: 30%; left: 70%;"></div>
+    <div class="sparkle" style="top: 50%; left: 40%;"></div>
+    <div class="sparkle" style="top: 70%; left: 80%;"></div>
+    <div class="sparkle" style="top: 85%; left: 25%;"></div>
+    <div class="sparkle" style="top: 60%; left: 60%;"></div>
+    <div class="sparkle" style="top: 20%; left: 80%;"></div>
+    <div class="sparkle" style="top: 40%; left: 10%;"></div>
+    <div class="sparkle" style="top: 75%; left: 50%;"></div>
+    <div class="sparkle" style="top: 55%; left: 35%;"></div>
+    <div class="sparkle" style="top: 15%; left: 65%;"></div>
+    <div class="sparkle" style="top: 90%; left: 45%;"></div>
+    <div class="sparkle" style="top: 35%; left: 25%;"></div>
+    <div class="sparkle" style="top: 50%; left: 75%;"></div>
+    <div class="sparkle" style="top: 65%; left: 15%;"></div>
+
+    <!-- Rose Elements -->
+    <div class="rose rose1"></div>
+    <div class="rose rose2"></div>
+
+    <!-- Greeting Container -->
+    <div class="container" id="greeting">
+        <!-- Animated letters will be injected here -->
+    </div>
+
+    <!-- Hello Kitty in Front -->
+    <div class="hello-kitty">
+        <div class="bow"></div>
+        <div class="face">
+            <div class="nose"></div>
+            <div class="whiskers-left"></div>
+            <div class="whiskers-right"></div>
+        </div>
+    </div>
+
+    <script>
+        const greeting = "hi danna";
+        const container = document.getElementById('greeting');
+
+        // Create span for each letter with increased spacing
+        greeting.split('').forEach(char => {
+            const span = document.createElement('span');
+            span.classList.add('letter');
+            span.textContent = char;
+            container.appendChild(span);
+        }
+
+        );
+
+        // Function to create sparkles dynamically (optional if you want more sparkles)
+        /*
+        function createSparkles() {
+            const sparkleCount = 30; // Increased number of sparkles for more effect
+            for (let i = 0; i < sparkleCount; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.style.top = `${Math.random() * 100}%`;
+                sparkle.style.left = `${Math.random() * 100}%`;
+                sparkle.style.animationDelay = `${Math.random() * 2}s`;
+                sparkle.style.width = `${Math.random() * 6 + 4}px`;
+                sparkle.style.height = sparkle.style.width;
+                container.appendChild(sparkle);
+            }
+        }
+
+        createSparkles();
+        */
+    </script>
+
+</body>
+  </html>
